@@ -1,0 +1,135 @@
+<div class="body d-flex justify-content-center">
+    <a routerLink=""><i  mat-button mat-dialog-close class="fa-solid fs-4 fa-x position-absolute top-0 end-0 m-4"></i></a>
+    <div class="m-4 auth border rounded p-4">
+        <mat-tab-group id="Auth_dialog" animationDuration="200ms" mat-align-tabs="center">
+            <mat-tab label="Login">
+                <form method="post" class="mt-5" [formGroup]="form_login" (ngSubmit)="login()">
+                    <!-- check of exist login -->
+                    <div *ngIf="!valid_email_password" style="background : #DA7B96" class="text-center text-white border  rounded mb-4 p-3">
+                        <span>Email or Password Incorrect</span>
+                        <a class="text-white fs-5 m-4" (click)="dismiss_error()"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example1">Email address</label>
+                        <input (click)="dismiss_error()" formControlName="email" type="email" id="form2Example1" class="form-control" required/>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example2">Password</label>
+                        <input (click)="dismiss_error()" formControlName="password" type="password" id="form2Example2" class="form-control" required />
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="d-flex justify-content-center">
+                        <button [disabled]="!(form_login.controls.email.valid && form_login.controls.password.valid)" type="submit" class="btn btn-primary w-50 btn-block mb-3">login</button>
+                    </div>
+                </form>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <!-- Forgot password -->
+                        <p data-bs-toggle="modal" data-bs-target="#forget">Forgot password?</p>
+
+                    </div>
+                </div>
+                <div class="text-primary text-center">
+                    <p>Login with :</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=152171721869-jug1jaqu75qti14r5hf9fi0s31jdatma.apps.googleusercontent.com&scope=openid%20profile%20email&state=sU8TPYfLeNUOvWpiq1awDmK4xy9NtUKcU7GxU6GJRko%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=y-0bLHWpWZjTb3KIufDR_xFNCvwMvGcQNaVic0uIZIM"
+                        type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fs-2 fab fa-google"></i>
+                    </a>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fs-2 fab fa-github"></i>
+                    </button>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Registration">
+                <form method="post" class="mt-5" [formGroup]="form_registre" (ngSubmit)="registre()">
+
+                    <div *ngIf="email_already_exist" style="background : #DA7B96" class="text-center text-white border  rounded mb-4 p-3">
+                        <span>This email is already registered</span>
+                        <a class="text-white fs-5 m-4" (click)="dismiss_error()"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+
+                    <div class="d-flex">
+                        <!-- firstname input -->
+                        <div class="form-outline mx-4">
+                            <label class="form-label" for="registerUsername">Firstname</label>
+                            <input (click)="dismiss_error()" formControlName="firstname" name="firstname" type="text" id="registerUsername" class="form-control" />
+                        </div>
+
+                        <!-- lastname input -->
+                        <div class="form-outline mx-4">
+                            <label class="form-label" for="registerUsername">Lastname</label>
+                            <input (click)="dismiss_error()" formControlName="lastname" type="text" id="registerUsername" class="form-control" />
+                        </div>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline m-4">
+                        <label class="form-label" for="registerEmail">Email</label>
+                        <input (click)="dismiss_error()" formControlName="email" type="email" id="registerEmail" class="form-control" />
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline m-4">
+                        <label class="form-label" for="registerPassword">Password</label>
+                        <input (click)="dismiss_error()" formControlName="password" type="password" id="registerPassword" class="form-control" />
+                    </div>
+
+                    <!-- Repeat Password input -->
+                    <div class="form-outline m-4">
+                        <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+                        <input (click)="dismiss_error()" formControlName="repeat_password" type="password" id="registerRepeatPassword" class="form-control" />
+                        <p (click)="dismiss_error()" class="text-danger mt-1" *ngIf="!match_password">password and confirm password must be the same</p>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="d-flex justify-content-center">
+                        <button [disabled]="!(form_registre.controls.firstname.valid &&
+                    form_registre.controls.lastname.valid &&
+                    form_registre.controls.email.valid &&
+                    form_registre.controls.password.valid &&
+                    form_registre.controls.repeat_password.valid)" type=" submit " class="btn btn-primary w-50 btn-block mb-3 ">Send</button>
+                    </div>
+                </form>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" id="forget" aria-labelledby="addClass" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary" id="exampleModalLabel">Forget password</h5>
+                    <button type="button" class="btn-close" #closebutton data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form method="post" [formGroup]="form_forget_password">
+                        <div *ngIf="false" style="background : #DA7B96" class="text-center text-white border  rounded mb-4 p-3">
+                            <span>This email is not exist</span>
+                            <a class="text-white fs-5 m-4" (click)="dismiss_error()"><i class="fa-solid fa-xmark"></i></a>
+                        </div>
+                        <div class="form-group m-2">
+                            <label class="control-label text-primary">Email</label>
+                            <input (click)="dismiss_error()" formControlName="email" class="form-control input-md " required type="email">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-block mb-3">Send</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

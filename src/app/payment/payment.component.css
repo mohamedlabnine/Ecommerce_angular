@@ -1,0 +1,9 @@
+app-navbar {
+    z-index: 1;
+    width: 100%;
+    background-color: gainsboro;
+}
+
+.submit-button {
+    margin-top: 10px;
+}

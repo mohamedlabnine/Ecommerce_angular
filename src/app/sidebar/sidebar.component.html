@@ -1,0 +1,84 @@
+<div class="bg-secondary">
+    <ul class="navbar-nav bg-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <div class="sidebar-brand d-flex align-items-center justify-content-center">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i *ngIf="role == 'Store'" class="fa-solid fa-store"></i>
+                <i *ngIf="role == 'Admin'" class="fa-solid fa-user"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"> {{ role }} </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li *ngIf="role == 'Admin'" class="nav-item active">
+            <a class="nav-link" routerLink="../dashboard">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Manage your Product
+        </div>
+
+        <!-- Nav Item - Add Product -->
+        <li class="nav-item">
+
+            <a (click)="openDialog()" class="nav-link collapsed">
+                <i class="f-white  fa-solid fa-plus"></i>
+                <span>Add Product</span>
+            </a>
+
+        </li>
+
+        <!-- Nav Item - Sitting Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Sitting</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Manage Your order
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a routerLink="/order" class="nav-link collapsed">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Oreder</span>
+            </a>
+
+        </li>
+
+        <!-- Nav Item - Store -->
+        <li *ngIf="role == 'Admin'" class="nav-item">
+            <a class="nav-link">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Store</span></a>
+        </li>
+        <!-- Nav Item - Product -->
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/products">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Product</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+
+    </ul>
+</div>

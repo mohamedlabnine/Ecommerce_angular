@@ -1,0 +1,61 @@
+<div class="w-100 d-flex  justify-content-center position-relative">
+    <form method="post" [formGroup]="form" (ngSubmit)="addProduct()" enctype="multipart/form-data">
+        <h1 class="text-center font-monospace text-primary">Add Product </h1>
+        <i mat-button mat-dialog-close class="fa-solid fs-4 fa-x position-absolute top-0 end-0 m-2 "></i>
+        <div class="form-group d-flex justify-content-center ">
+            <div class="btn_upload ">
+                <label *ngIf="!isSelected" class="form-label w-100 h-100 p-4 border border-primary rounded text-primary" for="customFile1"><i  class="fs-1 fa-sharp fa-solid fa-upload"></i></label>
+                <label *ngIf="isSelected" class="border rounded" for="customFile1"><img class="img" [src]="preview"></label>
+                <input formControlName="image" (change)="onFileChange($event)" type="file" class="form-control d-none" id="customFile1" />
+            </div>
+        </div>
+        <div class="d-flex felx-row m-2">
+            <div class="form-group w-50 m-2 ">
+                <label class="text-primary">Product Name :</label>
+                <input formControlName="name" class="form-control" type="text" placeholder="jompe">
+            </div>
+            <div class="form-group w-50 m-2 ">
+                <label class="text-primary">Product Category :</label>
+                <select formControlName="category" class="form-select">
+                    <option value="Clooth">Clooth</option>
+                    <option value="Food">Food</option>
+                    <option value="Car">Car</option>
+                    <option value="Sport">Sport</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex felx-row m-2">
+            <div class="form-group w-50 m-2 ">
+                <label class="text-primary">Product price :</label>
+                <input formControlName="price" class="form-control" type="number" placeholder="0">
+            </div>
+            <div class="form-group w-50 m-2">
+                <label class="text-primary">Product quantity</label>
+                <input formControlName="quantity" class="form-control" type="number" placeholder="0">
+            </div>
+        </div>
+        <div class="d-flex felx-row m-2">
+            <div class="form-group w-50 m-2 ">
+                <label class="text-primary">Product description :</label>
+                <textarea formControlName="description" class="form-control" cols="30" rows="1"></textarea>
+            </div>
+            <div class="form-group w-50 m-2">
+                <label class="text-primary">offer</label>
+                <input formControlName="offer" class="form-control" type="number" placeholder="0">
+            </div>
+        </div>
+
+        <div class="d-flex felx-row m-2 position-relative">
+            <div class="m-2">
+                <button mat-button mat-dialog-close [disabled]="!(form.controls.name.valid && form.controls.description.valid
+                && form.controls.category.valid && form.controls.price.valid
+                && form.controls.quantity.valid && form.controls.offer.valid
+                && form.controls.image.valid)" type="submit" class="btn btn-primary">Add</button>
+            </div>
+            <div class="m-2">
+                <button mat-button mat-dialog-close class="btn btn-Secondary">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,9 @@
+.content {
+    position: absolute;
+    left: 20%;
+    width: 80%;
+}
+
+.lineChart {
+    height: 440px;
+}

@@ -1,0 +1,32 @@
+<div class="w-100 h-100 d-flex flex-row">
+    <div class="w-50 text-center pt-4">
+        <img class="mt-4" src="https://bechofy.in/img/hero-img/ecommerce-store.png" alt="">
+    </div>
+    <div class="main w-50 m-4  border rounded position-relative">
+        <h1 class="font-monospace mt-4 text-center">Create Your Own Store</h1>
+        <div class="position-relative ">
+            <img class="Store_img" src="./assets/Image/Store.png" alt="">
+        </div>
+        <form class="sub_main" [formGroup]="form_Store" (ngSubmit)="createStore()">
+            <div *ngIf="isNotEnterEmail" class="d-flex flex-row form_email font-monospace ">
+                <input formControlName="email" class="email_input p-3 border rounded m-2" placeholder="Enter your email" type="email">
+                <button [disabled]="form_Store.controls.email.invalid" (click)="sendEmailVerification()" class="btn btn bg-primary m-2 text-white" type="submit">Start</button>
+            </div>
+            <div *ngIf="!isNotEnterEmail" class="w-50 ms-5 form_email">
+                <div class="form-group m-4 font-monospace">
+                    <label>Store Name</label>
+                    <input formControlName="name" type="text" class="form-control mt-2" placeholder="must be unique">
+                </div>
+                <div class="form-group m-4 font-monospace">
+                    <label for="">Code of verification</label>
+                    <input formControlName="code" type="text" class="form-control mt-2" placeholder="0.0.0.0">
+                    <span *ngIf="!code_correct" class="text-danger ">code incorrect</span>
+                </div>
+                <div class="form-group m-4">
+                    <button [disabled]="form_Store.controls.name.invalid && form_Store.controls.code.invalid" type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
